@@ -1,5 +1,16 @@
 import React from 'react';
 import { Github } from 'lucide-react';
+import w1 from '../assets/w1.jpg';
+import w2 from '../assets/w2.jpg';
+import w3 from '../assets/w3.jpg';
+import w4 from '../assets/w4.jpg';
+import w5 from '../assets/w5.jpg';
+import w6 from '../assets/w6.jpg';
+import w7 from '../assets/w7.jpg';
+import w8 from '../assets/w8.jpg';
+import w9 from '../assets/w9.jpg';
+import w10 from '../assets/w10.jpg';
+import w11 from '../assets/w11.jpg';
 
 // Projects Component - Simplified to ensure all projects show
 const Projects: React.FC = () => {
@@ -162,17 +173,9 @@ const Skills: React.FC = () => {
 // Certificates Component
 const Certificates: React.FC = () => {
   const certificateImages = [
-    'https://via.placeholder.com/400x300/6366f1/ffffff?text=Certificate+1',
-    'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Certificate+2',
-    'https://via.placeholder.com/400x300/a855f7/ffffff?text=Certificate+3',
-    'https://via.placeholder.com/400x300/c084fc/ffffff?text=Certificate+4',
-    'https://via.placeholder.com/400x300/d8b4fe/000000?text=Certificate+5',
-    'https://via.placeholder.com/400x300/6366f1/ffffff?text=Certificate+6',
-    'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Certificate+7',
-    'https://via.placeholder.com/400x300/a855f7/ffffff?text=Certificate+8',
-    'https://via.placeholder.com/400x300/c084fc/ffffff?text=Certificate+9',
-    'https://via.placeholder.com/400x300/d8b4fe/000000?text=Certificate+10'
-  ];
+  w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11
+];
+
 
   return (
     <section id="certificates" className="min-h-screen py-20 overflow-hidden bg-gradient-to-br from-violet-900 via-purple-900 to-purple-800">
@@ -187,7 +190,7 @@ const Certificates: React.FC = () => {
         }
         
         .scrolling-certificates {
-          animation: scroll-left 20s linear infinite;
+          animation: scroll-left 9s linear infinite;
         }
         
         .scrolling-certificates:hover {

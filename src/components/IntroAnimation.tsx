@@ -20,11 +20,11 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
       }
     }, 100); // Normal typing speed
 
-    // Navigate to home page after exactly 7 seconds
+    // Navigate to home page after exactly 6 seconds
     const navigationTimer = setTimeout(() => {
       setShowAnimation(false);
       onComplete();
-    }, 7000); // 7 seconds total
+    }, 6000); // 6 seconds total
 
     return () => {
       clearInterval(timer);
@@ -37,13 +37,13 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-pink-400 via-purple-500 to-blue-600 flex items-center justify-center z-50">
-      <div className="text-6xl font-bold text-white text-center">
+    <div className="fixed inset-0 bg-gradient-to-br from-pink-400 via-purple-500 to-blue-600 flex items-center justify-center z-50 px-4">
+      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white text-center max-w-4xl leading-tight">
         {currentText.split('').map((char, index) => (
           <span
             key={index}
             className="inline-block animate-bounce"
-            style={{ animationDelay: `${index * 0.1}s` }} // Normal bounce timing
+            style={{ animationDelay: `${index * 0.08}s` }} // Slightly faster bounce timing
           >
             {char === ' ' ? '\u00A0' : char}
           </span>
