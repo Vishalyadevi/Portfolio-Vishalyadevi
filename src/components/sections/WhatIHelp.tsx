@@ -11,7 +11,8 @@ import {
   Shield,
   Layers,
   GitBranch,
-  Palette
+  Palette,
+  Wrench
 } from 'lucide-react';
 
 const WhatIDo = () => {
@@ -22,7 +23,7 @@ const WhatIDo = () => {
       icon: Globe,
       title: 'Frontend Development',
       description: 'Creating responsive and interactive user interfaces using React, Vue.js, and modern CSS frameworks.',
-      technologies: ['React',  'Tailwind CSS'],
+      technologies: ['React', 'Tailwind CSS'],
       color: 'from-blue-500 to-cyan-500',
       delay: 0
     },
@@ -38,7 +39,7 @@ const WhatIDo = () => {
       icon: Database,
       title: 'Database Design',
       description: 'Designing efficient database schemas and optimizing queries for better performance.',
-      technologies: ['MySQL'],
+      technologies: ['MySQL', 'MongoDB'],
       color: 'from-purple-500 to-pink-500',
       delay: 0.2
     },
@@ -46,18 +47,44 @@ const WhatIDo = () => {
       icon: Bug,
       title: 'Testing & Debugging',
       description: 'Ensuring code quality through comprehensive testing and efficient debugging practices.',
-      technologies: ['Thunder', 'Postman', 'Chrome DevTools'],
+      technologies: ['Thunder Client', 'Postman', 'Chrome DevTools'],
       color: 'from-yellow-500 to-orange-500',
-      delay: 0.5
+      delay: 0.3
     },
   ];
 
-  // Added the missing specializations array
-  const specializations = [
-    { name: 'Full Stack Development', percentage: 95 },
-    { name: 'Frontend Development', percentage: 90 },
-    { name: 'Backend Development', percentage: 85 },
-    { name: 'Database Management', percentage: 80 }
+  const tools = [
+    {
+      name: 'Git',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+      color: 'from-orange-500 to-red-500'
+    },
+    {
+      name: 'GitHub',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+      color: 'from-gray-600 to-gray-800'
+    },
+    {
+      name: 'Postman',
+      icon: 'https://www.svgrepo.com/show/354202/postman-icon.svg',
+      color: 'from-orange-400 to-orange-600'
+    },
+  
+    {
+      name: 'Docker',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+      color: 'from-blue-400 to-blue-600'
+    },
+    {
+      name: 'VS Code',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      name: 'Jenkins',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg',
+      color: 'from-red-500 to-orange-500'
+    }
   ];
 
   return (
@@ -84,12 +111,9 @@ const WhatIDo = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
         </div>
-
-        {/* Specializations Bar */}
-       
         
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-20">
           {services.map(({ icon: Icon, title, description, technologies, color, delay }, index) => (
             <div
               key={title}
@@ -136,6 +160,53 @@ const WhatIDo = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Tools Section */}
+        <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center gap-3 mb-4">
+              <Wrench className="text-pink-300" size={32} />
+              <h3 className="text-4xl font-bold text-white bg-gradient-to-r from-pink-300 via-purple-300 to-violet-300 bg-clip-text text-transparent">
+                Tools & Technologies
+              </h3>
+              <Wrench className="text-purple-300" size={32} />
+            </div>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Technologies and tools I use to bring ideas to life and streamline development workflows.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+            {tools.map((tool, index) => (
+              <div
+                key={tool.name}
+                className="group relative animate-fade-in"
+                style={{ animationDelay: `${0.6 + index * 0.1}s` }}
+              >
+                {/* Glow Effect */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${tool.color} rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-500`}></div>
+                
+                {/* Tool Card */}
+                <div className="relative flex flex-col items-center justify-center p-6 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 hover:border-white/30 transition-all duration-500 hover:scale-110 hover:shadow-xl group-hover:bg-white/15 h-full">
+                  <div className="w-16 h-16 mb-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <img 
+                      src={tool.icon} 
+                      alt={tool.name}
+                      className="w-full h-full object-contain drop-shadow-lg"
+                      style={{ filter: 'brightness(1.1)' }}
+                    />
+                  </div>
+                  <h4 className="text-sm font-semibold text-white text-center group-hover:text-pink-300 transition-colors duration-300">
+                    {tool.name}
+                  </h4>
+                  
+                  {/* Animated dot indicator */}
+                  <div className={`absolute -top-1 -right-1 w-2 h-2 rounded-full bg-gradient-to-r ${tool.color} transition-all duration-300 group-hover:scale-150 group-hover:shadow-lg`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -6,27 +6,28 @@ const About = () => {
     { 
       icon: Code, 
       label: 'Skillrack Problems Solved', 
-      value: '1200+',
+      value: '1700+',
       color: 'from-blue-500 to-cyan-500'
     },
     { 
       icon: Trophy, 
       label: 'Leetcode Problems Solved', 
-      value: '270+',
+      value: '400+',
       color: 'from-yellow-500 to-orange-500'
     },
     { 
       icon: Lightbulb, 
-      label: 'Mini Projects', 
-      value: '5',
-      color: 'from-green-500 to-emerald-500'
+      label: 'Projects', 
+      value: '3',
+      color: 'from-purple-500 to-pink-500'
     },
     { 
       icon: Award, 
-      label: 'Certifications', 
-      value: '10+',
-      color: 'from-red-500 to-rose-500'
+      label: 'Mini Projects', 
+      value: '6',
+      color: 'from-green-500 to-emerald-500'
     },
+   
   ];
 
   // Added the missing achievements array
