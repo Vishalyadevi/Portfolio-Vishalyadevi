@@ -5,8 +5,8 @@ import Home from './components/sections/Home';
 import About from './components/sections/About';
 import WhatIHelp from './components/sections/WhatIHelp';
 import Projects from './components/sections/Projects';
-import Skills from './components/sections/Skills';
-import Certificates from './components/sections/Certificates';
+//import Skills from './components/sections/Skills';
+//import Certificates from './components/sections/Certificates';
 import Contact from './components/sections/Contact';
 import Footer from './components/sections/Footer';
 
