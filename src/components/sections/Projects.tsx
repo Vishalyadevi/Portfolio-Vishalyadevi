@@ -31,6 +31,7 @@ const Projects: React.FC = () => {
       tech: ['React', 'Java', 'Spring Boot', 'MySQL'],
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHds9LFZNeDyd0p0nvQOwDQvGvo4Aua0sEsw&s',
       github: 'https://github.com/Vishalyadevi/Plantpal',
+      demo:'https://plantpal-p5xc.onrender.com/',
       
     },
     {
