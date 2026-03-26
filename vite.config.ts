@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Portfolio-Vishalyadevi/",  // 🔁 This is your GitHub repo name
+  base: "/Portfolio-Vishalyadevi/", 
   optimizeDeps: {
     exclude: ['lucide-react'],
   },

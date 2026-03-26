@@ -1,185 +1,118 @@
-import React from 'react';
-import { Code, Trophy, Lightbulb, Github, Award, BookOpen } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Zap, Cpu, Target, Shield, Laptop, Code2, Database } from 'lucide-react';
+import avatarImg from '../../assests/dev_avatar_headshot.png';
 
-const About = () => {
-  const stats = [
-    { 
-      icon: Code, 
-      label: 'Skillrack Problems Solved', 
-      value: '1700+',
-      color: 'from-blue-500 to-cyan-500'
-    },
-    { 
-      icon: Trophy, 
-      label: 'Leetcode Problems Solved', 
-      value: '400+',
-      color: 'from-yellow-500 to-orange-500'
-    },
-    { 
-      icon: Lightbulb, 
-      label: 'Projects', 
-      value: '3',
-      color: 'from-purple-500 to-pink-500'
-    },
-    { 
-      icon: Award, 
-      label: 'Mini Projects', 
-      value: '6',
-      color: 'from-green-500 to-emerald-500'
-    },
-   
-  ];
+const About: React.FC = () => {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Added the missing achievements array
-  const achievements = [
-    "Full Stack Development Expert",
-    "Problem Solving Enthusiast",
-    "Clean Code Advocate",
-    "Continuous Learner"
-  ];
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        setMousePos({ x, y });
+    };
 
-  return (
-    <section className="relative min-h-screen overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-800 via-purple-900 to-violet-900">
-        {/* Floating Geometric Shapes */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-violet-400/20 to-purple-400/20 rounded-full blur-lg animate-bounce"></div>
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-gradient-to-r from-violet-300/20 to-purple-300/20 rounded-full blur-lg animate-bounce"></div>
-        
-        {/* Animated Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10">
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#A855F7" />
-              <stop offset="100%" stopColor="#EC4899" />
-            </linearGradient>
-          </defs>
-          <path 
-            d="M0,300 Q400,100 800,300 T1600,300" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="2" 
-            fill="none"
-            className="animate-pulse"
-          />
-          <path 
-            d="M0,500 Q600,200 1200,500 T2400,500" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="1" 
-            fill="none"
-            className="animate-pulse"
-            style={{ animationDelay: '1s' }}
-          />
-        </svg>
-      </div>
+    return (
+        <section id="about" className="h-full w-full relative flex items-center justify-center p-6 md:p-12 overflow-hidden bg-transparent">
+            <div className="container mx-auto max-w-6xl h-full flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative z-10 py-12">
+                
+                {/* LEFT SIDE: THE AVATAR (3D TILT EFFECT) */}
+                <motion.div 
+                    ref={cardRef}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={() => setMousePos({ x: 0, y: 0 })}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                    className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 group perspective-1000"
+                >
+                    {/* Glowing Backdrop */}
+                    <div className="absolute inset-0 bg-cyan-500/10 rounded-full blur-[60px]" />
+                    <motion.div 
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-[-20px] border-2 border-dashed border-cyan-400/30 rounded-full"
+                    />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-pink-300 via-purple-300 to-violet-300 bg-clip-text text-transparent animate-slide-up">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-violet-500 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-              <div className="relative p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/25">
-                <p className="text-xl text-white/90 leading-relaxed font-light">
-                  I'm <span className="font-semibold text-pink-300">Vishalya Devi</span>, a passionate Full Stack Developer who thrives on solving real-world problems through innovative technology solutions. 
-                  I believe in building clean, efficient, and creative digital experiences that make a meaningful difference in people's lives.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+                    {/* Circular Avatar Container */}
+                    <motion.div 
+                        animate={{ 
+                            rotateY: mousePos.x * 25,
+                            rotateX: -mousePos.y * 25,
+                            scale: 1.02
+                        }}
+                        className="relative w-full h-full z-10 rounded-full border-4 border-cyan-400 overflow-hidden shadow-[0_0_40px_rgba(0,243,255,0.4)] bg-slate-900 transition-transform duration-200 ease-out"
+                    >
+                        <img 
+                            src={avatarImg} 
+                            alt="Full Stack Developer Avatar" 
+                            className="w-full h-full object-cover brightness-105 contrast-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent opacity-80" />
+                    </motion.div>
 
-        {/* Achievements Banner */}
-        <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {achievements.map((achievement, index) => (
-              <div 
-                key={index}
-                className="p-4 bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 text-center"
-                style={{ animationDelay: `${0.1 * index}s` }}
-              >
-                <p className="text-white/80 font-medium text-sm">{achievement}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+                    {/* HUD Shield Overlay */}
+                    <div className="absolute -top-4 -right-4 p-3 bg-cyan-500 rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.5)] z-20">
+                        <Shield size={24} className="text-[#0f172a]" />
+                    </div>
+                </motion.div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-          {stats.map(({ icon: Icon, label, value, color }, index) => (
-            <div
-              key={label}
-              className="group relative"
-              style={{ animationDelay: `${0.1 * index}s` }}
-            >
-              {/* Glow Effect */}
-              <div className={`absolute -inset-1 bg-gradient-to-r ${color} rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000`}></div>
-              
-              {/* Card */}
-              <div className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl text-center group-hover:bg-white/15">
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r ${color} rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
-                  <Icon size={36} className="text-white drop-shadow-lg" />
+                {/* RIGHT SIDE: THE INTEL (CRISPY CONTENT) */}
+                <div className="flex-1 text-left flex flex-col items-start gap-5 max-w-2xl px-4 md:px-0">
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-mono tracking-[0.2em] uppercase mb-4">
+                            <Cpu size={14} className="animate-pulse" />
+                            Dossier_ID: FULL_STACK_ENGINEER
+                        </div>
+
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tighter mb-6 uppercase whitespace-nowrap">
+                            About <span className="text-cyan-400">Me</span>
+                        </h2>
+
+                        {/* Crispy Paragraph About */}
+                        <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-medium mb-8 max-w-xl opacity-90 first-letter:text-4xl first-letter:text-cyan-400 first-letter:font-black">
+                            I turn coffee into code and complex architectural challenges into elegant digital realities. 
+                            Specializing in the MERN stack, I forge seamless frontends and robust backends that don't 
+                            just work—they excel. My mission is building high-impact legacies through clean, 
+                            scalable, and immersive technology.
+                        </p>
+
+                        {/* BOSS FIGHT QUOTE */}
+                        <motion.div 
+                            whileHover={{ x: 10 }}
+                            className="p-6 md:p-8 rounded-2xl bg-cyan-400/5 border-l-4 border-cyan-400 backdrop-blur-sm relative overflow-hidden group mb-10 shadow-xl"
+                        >
+                            <Zap size={60} className="absolute -top-4 -right-4 text-cyan-400 opacity-10 group-hover:opacity-30 transition-opacity" />
+                            <p className="text-lg md:text-xl font-bold text-white tracking-wide italic">
+                                "Every bug is a boss fight. I don't quit until I win."
+                            </p>
+                        </motion.div>
+
+                       
+                    </motion.div>
                 </div>
-                
-                {/* Value */}
-                <h3 className="text-4xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors duration-300">
-                  {value}
-                </h3>
-                
-                {/* Label */}
-                <p className="text-white/70 font-medium text-lg group-hover:text-white/90 transition-colors duration-300">
-                  {label}
-                </p>
-              </div>
             </div>
-          ))}
-        </div>
 
-        {/* Call to Action */}
-        
-      </div>
+            {/* Decorative BG Accents */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
+            <div className="absolute bottom-10 right-10 opacity-20 hidden lg:block">
+                <Laptop size={200} className="text-slate-800" />
+            </div>
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 1s ease-out forwards;
-        }
-
-        .animate-slide-up {
-          animation: slide-up 1s ease-out forwards;
-        }
-      `}</style>
-    </section>
-  );
+            <style>{`
+                .perspective-1000 {
+                    perspective: 1000px;
+                }
+            `}</style>
+        </section>
+    );
 };
 
 export default About;
