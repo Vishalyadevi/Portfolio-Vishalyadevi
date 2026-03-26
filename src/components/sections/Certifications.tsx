@@ -147,13 +147,6 @@ const Certifications: React.FC = () => {
                 )}
             </AnimatePresence>
 
-            <style>{`
-                .custom-glass-scroll::-webkit-scrollbar { width: 3px; }
-                .custom-glass-scroll::-webkit-scrollbar-thumb { 
-                    background: rgba(34, 211, 238, 0.2); 
-                    border-radius: 10px;
-                }
-            `}</style>
         </section>
     );
 };

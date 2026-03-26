@@ -156,25 +156,25 @@ const ContactTerminal: React.FC = () => {
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.99 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="h-[800px] lg:h-[900px] max-h-[92vh] w-full bg-slate-1000/98 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col shadow-[0_0_200px_rgba(239,68,68,0.2)] relative mx-auto"
+                    className="h-[500px] sm:h-[600px] md:h-[800px] lg:h-[900px] max-h-[85vh] w-full bg-slate-1000/98 backdrop-blur-3xl border border-white/10 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden flex flex-col shadow-[0_0_200px_rgba(239,68,68,0.2)] relative mx-auto"
                     onClick={() => inputRef.current?.focus()}
                 >
                     {/* Header Bar */}
-                    <div className="px-10 py-5 bg-slate-900/60 border-b border-white/10 flex items-center justify-between relative z-40">
-                        <div className="flex gap-3">
-                            <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.6)]" />
-                            <div className="w-3 h-3 rounded-full bg-slate-800" />
-                            <div className="w-3 h-3 rounded-full bg-slate-800" />
+                    <div className="px-6 md:px-10 py-4 md:py-5 bg-slate-900/60 border-b border-white/10 flex items-center justify-between relative z-40">
+                        <div className="flex gap-2 md:gap-3">
+                            <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.6)]" />
+                            <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-slate-800" />
+                            <div className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-slate-800" />
                         </div>
-                        <div className="flex items-center gap-3 text-[10px] font-black text-red-500 uppercase tracking-widest bg-red-600/10 px-4 py-1.5 rounded-lg border border-red-500/20">
-                            <TerminalSquare size={14} /> SYSTEM_ROOT_CONSOLE_EX
+                        <div className="flex items-center gap-2 md:gap-3 text-[8px] md:text-[10px] font-black text-red-500 uppercase tracking-widest bg-red-600/10 px-3 md:px-4 py-1.5 rounded-lg border border-red-500/20">
+                            <TerminalSquare size={14} className="hidden sm:block" /> SYSTEM_ROOT_CONSOLE_EX
                         </div>
                     </div>
 
                     {/* Output Area - High Density Text */}
                     <div 
                         ref={scrollRef}
-                        className="flex-1 p-12 overflow-y-auto custom-scrollbar flex flex-col gap-2 font-mono text-[12px] md:text-[13px] relative z-10 scroll-smooth pb-20"
+                        className="flex-1 p-6 md:p-12 overflow-y-auto custom-scrollbar flex flex-col gap-2 font-mono text-[11px] md:text-[13px] relative z-10 scroll-smooth pb-20"
                     >
                         <AnimatePresence>
                             {history.filter(line => line).map((line, i) => (
@@ -183,22 +183,23 @@ const ContactTerminal: React.FC = () => {
                                     initial={{ opacity: 0, x: -10 }} 
                                     animate={{ opacity: 1, x: 0 }}
                                     className={`
+                                        text-[11px] md:text-[13px]
                                         ${line.startsWith('>') ? 'text-cyan-400 font-bold' : 
                                           line.includes('ERR') ? 'text-red-500' : 
                                           line.includes('SUCCESSFUL') || line.includes('REC:') ? 'text-emerald-400 font-bold' : 
                                           'text-slate-400'}
-                                        leading-normal
+                                        leading-normal break-all
                                     `}
                                 >
-                                    {!line.startsWith('>') && !line.includes('---') && <span className="text-slate-800 mr-4 opacity-60">[{new Date().toLocaleTimeString('en-GB')}]</span>}
+                                    {!line.startsWith('>') && !line.includes('---') && <span className="text-slate-800 mr-2 md:mr-4 opacity-60">[{new Date().toLocaleTimeString('en-GB')}]</span>}
                                     {line}
                                 </motion.div>
                             ))}
                         </AnimatePresence>
                         
                         {!isBooting && contactMode !== 'SENDING' && (
-                            <form onSubmit={handleCommand} className="flex items-center gap-4 mt-6 group">
-                                <span className="text-red-500 font-bold animate-pulse flex-shrink-0 text-sm">
+                            <form onSubmit={handleCommand} className="flex items-center gap-2 md:gap-4 mt-4 md:mt-6 group">
+                                <span className="text-red-500 font-bold animate-pulse flex-shrink-0 text-xs md:text-sm">
                                     {contactMode === 'IDLE' ? 'ROOT@V-OS:~$ ' : 
                                      contactMode === 'NAME' ? 'ID_NAME: ' :
                                      contactMode === 'EMAIL' ? 'UPLINK: ' :
@@ -209,7 +210,7 @@ const ContactTerminal: React.FC = () => {
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    className="bg-transparent border-none outline-none text-white w-full p-0 m-0 uppercase placeholder-red-900/10 font-bold text-sm"
+                                    className="bg-transparent border-none outline-none text-white w-full p-0 m-0 uppercase placeholder-red-900/10 font-bold text-xs md:text-sm"
                                     placeholder={contactMode === 'IDLE' ? "TYPE '/HELP'..." : "AWAITING_INPUT..."}
                                     spellCheck={false}
                                     autoFocus
@@ -219,18 +220,18 @@ const ContactTerminal: React.FC = () => {
                     </div>
 
                     {/* Minimal Footer HUD */}
-                    <div className="px-12 py-4 border-t border-white/10 bg-slate-900/40 flex items-center justify-between text-[11px] font-mono text-slate-500 uppercase tracking-widest relative z-40">
-                        <div className="flex gap-8">
+                    <div className="px-6 md:px-12 py-3 md:py-4 border-t border-white/10 bg-slate-900/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-[9px] md:text-[11px] font-mono text-slate-500 uppercase tracking-widest relative z-40">
+                        <div className="flex gap-4 md:gap-8">
                             <span className="flex items-center gap-2">
-                                <Bot size={16} className="text-red-500" /> AI: READY
+                                <Bot size={14} className="text-red-500" /> AI: READY
                             </span>
                             <span className="flex items-center gap-2">
-                                <Cpu size={16} /> LOAD: 04%
+                                <Cpu size={14} /> LOAD: 04%
                             </span>
                         </div>
-                        <div className="flex gap-8 items-center">
+                        <div className="flex gap-4 md:gap-8 items-center">
                              <span className="text-emerald-500 font-bold">LATENCY: 02ms</span>
-                             <span className="px-4 py-1.5 bg-red-600 text-slate-1000 font-bold rounded-sm shadow-[0_0_15px_rgba(220,38,38,0.3)]">ENCRYPTED</span>
+                             <span className="px-3 md:px-4 py-1 md:py-1.5 bg-red-600 text-slate-1000 font-bold rounded-sm shadow-[0_0_15px_rgba(220,38,38,0.3)] text-[9px]">ENCRYPTED</span>
                         </div>
                     </div>
                 </motion.div>

@@ -18,6 +18,7 @@ const ContactTerminal = lazy(() => import('./components/sections/ContactTerminal
 const CustomCursor = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,13 +33,23 @@ const CustomCursor = () => {
       }
     };
 
+    const checkTouch = () => {
+      setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+
+    checkTouch();
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('touchstart', checkTouch);
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('touchstart', checkTouch);
     };
   }, []);
+
+  if (isTouch) return null;
 
   return (
     <>
@@ -93,9 +104,11 @@ const CustomCursor = () => {
   );
 };
 
-import { Terminal, Target, Award, Brain, ExternalLink, Code2, Layers, Monitor, Binary, CpuIcon } from 'lucide-react';
+import { Terminal, Target, Award, Brain, ExternalLink, Code2, Layers, Monitor, Binary, CpuIcon, Menu, X } from 'lucide-react';
 
 const Navigation = ({ level, setLevel }: { level: number; setLevel: (l: number) => void }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const navItems = [
     { id: 1, icon: <Monitor size={22} />, label: 'HOME' },
     { id: 2, icon: <CpuIcon size={22} />, label: 'ABOUT' },
@@ -111,6 +124,7 @@ const Navigation = ({ level, setLevel }: { level: number; setLevel: (l: number) 
 
   return (
     <>
+      {/* Desktop Navigation */}
       <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col gap-5">
         {navItems.map((item) => (
           <button
@@ -131,6 +145,95 @@ const Navigation = ({ level, setLevel }: { level: number; setLevel: (l: number) 
           </button>
         ))}
       </nav>
+
+      {/* Mobile Navigation Toggle */}
+      <div className="fixed top-8 right-6 z-[200] md:hidden">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-3 bg-slate-900/80 border border-emerald-500/30 rounded-full text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[190] md:hidden bg-slate-950/98 backdrop-blur-2xl flex flex-col items-center justify-center p-8 overflow-y-auto custom-mobile-menu-scroll"
+          >
+            <motion.div 
+              variants={{
+                show: {
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.1
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-6 w-full max-w-sm pt-4"
+            >
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.id}
+                  variants={{
+                    hidden: { opacity: 0, y: -50, scale: 0.8 },
+                    show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', damping: 12, stiffness: 200 } }
+                  }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    setLevel(item.id);
+                    setIsOpen(false);
+                  }}
+                  className={`flex flex-col items-center justify-center aspect-square rounded-full border-2 transition-all duration-300 relative group p-4 ${
+                    level === item.id 
+                    ? 'border-emerald-400 bg-emerald-400/10 text-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.3)]' 
+                    : 'border-white/5 bg-white/5 text-slate-400 hover:border-emerald-500/30'
+                  }`}
+                >
+                  {/* Decorative Outer Ring for Active */}
+                  {level === item.id && (
+                    <motion.div 
+                      layoutId="activeCircle"
+                      className="absolute -inset-2 rounded-full border border-emerald-400/30 animate-pulse pointer-events-none" 
+                    />
+                  )}
+                  
+                  <div className={level === item.id ? 'scale-110 mb-1' : 'mb-1 opacity-70 group-hover:opacity-100 transition-opacity'}>
+                    {item.icon}
+                  </div>
+                  <span className="text-[8px] font-black tracking-[0.2em] font-mono uppercase text-center leading-none">
+                    {item.label}
+                  </span>
+                </motion.button>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="mt-16 flex flex-col items-center gap-4"
+            >
+              <div className="text-[9px] font-mono text-emerald-500/50 tracking-[0.5em] uppercase font-bold">
+                MISSION CONTROL // MOBILE HUD
+              </div>
+              <div className="flex gap-2">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="w-1.5 h-1.5 rounded-full bg-emerald-500/20 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
@@ -139,7 +242,7 @@ const LevelProgress = ({ level }: { level: number }) => {
   const progress = (level / 10) * 100;
 
   return (
-    <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-64 md:w-96">
+    <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] w-[140px] sm:w-64 md:w-96">
       <div className="flex justify-between items-center mb-2 px-1">
         <span className="text-[10px] font-mono text-cyan-400 tracking-[0.2em] uppercase">LEVEL {level} // EXPLORER</span>
         <span className="text-[10px] font-mono text-slate-500 tracking-[0.1em]">{Math.round(progress)}% COMPLETE</span>
@@ -160,6 +263,16 @@ const App: React.FC = () => {
   const [level, setLevel] = useState(1);
   const [isSystemLoaded, setIsSystemLoaded] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkTouch();
+    window.addEventListener('touchstart', checkTouch);
+    return () => window.removeEventListener('touchstart', checkTouch);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -185,7 +298,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="relative bg-[#0f172a] min-h-screen selection:bg-cyan-500/30 overflow-hidden text-emerald-500 cursor-none">
+    <div className={`relative bg-[#0f172a] min-h-screen selection:bg-cyan-500/30 overflow-hidden text-emerald-500 ${!isTouch ? 'cursor-none' : ''}`}>
       <CustomCursor />
       <GameBackground level={isGameStarted ? level : 1} />
 
@@ -212,7 +325,7 @@ const App: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="group px-12 py-4 bg-cyan-400 text-slate-900 rounded-full font-bold uppercase tracking-[0.3em] overflow-hidden relative"
             >
-              <span className="relative z-10">Press ENTER to Start</span>
+              <span className="relative z-10">{isTouch ? 'Tap to Start' : 'Press ENTER to Start'}</span>
               <motion.div
                 className="absolute inset-0 bg-white/20 translate-x-[-100%]"
                 animate={{ translateX: ["-100%", "200%"] }}
@@ -225,7 +338,7 @@ const App: React.FC = () => {
               transition={{ duration: 2, repeat: Infinity }}
               className="mt-12 text-[10px] font-mono text-slate-500 tracking-[0.1em]"
             >
-              [W][S] OR ARROWS TO NAVIGATE MISSIONS
+              {isTouch ? 'USE THE MOBILE MENU TO NAVIGATE' : '[W][S] OR ARROWS TO NAVIGATE MISSIONS'}
             </motion.div>
           </div>
         </div>
@@ -245,7 +358,7 @@ const App: React.FC = () => {
                 className="w-full h-full flex flex-col items-center justify-center p-6 pt-16 sm:pt-20 md:p-12 md:pt-24 lg:pt-28"
               >
                 <Suspense fallback={<SectionPlaceholder />}>
-                  <div className={`w-full max-w-7xl mx-auto h-full ${level === 1 || level === 2 || level === 3 || level === 4 || level === 5 ? 'overflow-hidden' : 'overflow-y-auto'} custom-glass-scroll`}>
+                  <div className="w-full max-w-7xl mx-auto h-full overflow-y-auto md:overflow-hidden custom-glass-scroll">
                     {level === 1 && <Home />}
                     {level === 2 && <About />}
                     {level === 3 && <Projects />}

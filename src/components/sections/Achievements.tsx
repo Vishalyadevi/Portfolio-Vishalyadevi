@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Trophy, Star, ShieldCheck, Zap, Target, Sparkles, Brain } from 'lucide-react';
+import { Award, Trophy, ShieldCheck, Target, Sparkles, Brain } from 'lucide-react';
 
 const Medal = ({ title, sub, icon, color, delay }: any) => {
     return (
@@ -85,7 +85,7 @@ const Achievements: React.FC = () => {
     ];
 
     return (
-        <section id="achievements" className="h-full w-full relative overflow-hidden flex flex-col pt-8">
+        <section id="achievements" className="min-h-screen w-full relative overflow-hidden flex flex-col pt-8 md:pt-16">
             <div className="container mx-auto max-w-7xl px-8 h-full flex flex-col justify-center">
                 
                 {/* Level Header - Large and Glowing */}
@@ -93,11 +93,11 @@ const Achievements: React.FC = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="px-6 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-[11px] font-mono tracking-[0.8em] uppercase mb-6 shadow-[0_0_20px_rgba(234,179,8,0.15)]"
+                        className="px-6 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-[11px] font-mono tracking-[0.4em] md:tracking-[0.8em] uppercase mb-6 shadow-[0_0_20px_rgba(234,179,8,0.15)]"
                     >
                         Mastery_Readout // Level_07
                     </motion.div>
-                    <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                    <h2 className="text-4xl md:text-8xl font-black text-white uppercase tracking-tighter mb-6 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                         Acquired <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Glory</span>
                     </h2>
                     <div className="flex items-center gap-6 mt-2">

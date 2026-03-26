@@ -72,17 +72,17 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
              <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
           </div>
 
-          <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-tight transition-colors group-hover:text-cyan-400">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-tight transition-colors group-hover:text-cyan-400">
             {project.title}
           </h3>
 
-          <p className="text-slate-400 text-xs leading-relaxed line-clamp-2 opacity-80 group-hover:opacity-100">
+          <p className="text-slate-400 text-[10px] sm:text-xs leading-relaxed line-clamp-2 opacity-80 group-hover:opacity-100">
             {project.description}
           </p>
 
           <div className="flex flex-wrap gap-1.5 mt-auto">
             {project.stacks.map(s => (
-              <span key={s} className="px-1.5 py-0.5 bg-cyan-500/5 border border-cyan-500/10 rounded text-[7px] font-mono text-cyan-400/70 tracking-tighter uppercase whitespace-nowrap">
+              <span key={s} className="px-1.5 py-0.5 bg-cyan-500/5 border border-cyan-500/10 rounded text-[8px] sm:text-[9px] md:text-[7px] font-mono text-cyan-400/70 tracking-tighter uppercase whitespace-nowrap">
                 {s}
               </span>
             ))}
@@ -93,19 +93,19 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               href={project.github} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all text-white hover:text-cyan-400"
+              className="flex items-center justify-center gap-1.5 py-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all text-white hover:text-cyan-400"
             >
               <Github size={14} />
-              <span className="text-[7px] font-bold uppercase tracking-widest">Source</span>
+              <span className="text-[9px] sm:text-[10px] md:text-[7px] font-bold uppercase tracking-widest">Source</span>
             </a>
             <a 
               href={project.demo} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-2 bg-cyan-500/10 border border-cyan-400/30 rounded-lg hover:bg-cyan-500/20 transition-all text-cyan-400 hover:text-white"
+              className="flex items-center justify-center gap-1.5 py-2.5 bg-cyan-500/10 border border-cyan-400/30 rounded-lg hover:bg-cyan-500/20 transition-all text-cyan-400 hover:text-white"
             >
               <Play size={14} />
-              <span className="text-[7px] font-bold uppercase tracking-widest">Execute</span>
+              <span className="text-[9px] sm:text-[10px] md:text-[7px] font-bold uppercase tracking-widest">Execute</span>
             </a>
           </div>
         </div>
@@ -160,7 +160,7 @@ const Projects: React.FC = () => {
         {/* Header HUD - Compact */}
         <div className="flex flex-col items-center text-center">
           
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-2 leading-none">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-2 leading-none">
             Active <span className="text-cyan-400 font-outline-2">Missions</span>
           </h2>
           <div className="flex items-center gap-4 text-slate-500 font-mono text-[8px] tracking-[0.2em] uppercase">
@@ -175,8 +175,8 @@ const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Projects Grid - Reduced size */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-h-[70vh]">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:max-h-[70vh]">
           {projects.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
           ))}

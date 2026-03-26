@@ -104,12 +104,12 @@ const EliteStat = ({ label, value, sub, icon, color, delay }: any) => {
 
 const MyPractices: React.FC = () => {
     return (
-        <section id="practices" className="h-full w-full relative overflow-hidden flex flex-col pt-4">
+        <section id="practices" className="min-h-screen w-full relative overflow-hidden flex flex-col pt-4 md:pt-8">
             
-            <div className="container mx-auto max-w-7xl px-8 flex flex-col h-full pt-4">
+            <div className="container mx-auto max-w-7xl px-4 sm:px-8 flex flex-col pt-4 pb-20">
                 
                 {/* Unified Headers Grid */}
-                <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 mb-10">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-12 mb-10">
                     <div className="flex flex-col">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -139,7 +139,7 @@ const MyPractices: React.FC = () => {
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-start h-full">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 items-start">
                     
                     {/* LOGIC HUB */}
                     <div className="space-y-4">

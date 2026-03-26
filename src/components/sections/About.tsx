@@ -72,7 +72,7 @@ const About: React.FC = () => {
                             Dossier_ID: FULL_STACK_ENGINEER
                         </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tighter mb-6 uppercase whitespace-nowrap">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tighter mb-6 uppercase">
                             About <span className="text-cyan-400">Me</span>
                         </h2>
 

@@ -84,7 +84,7 @@ const Skills: React.FC = () => {
     const selectedSkill = SKILL_DATA.find(s => s.id === selectedId);
 
     return (
-        <section id="skills" className="h-[100vh] w-full relative overflow-hidden bg-[#020617] flex flex-col items-center pt-8">
+        <section id="skills" className="min-h-screen w-full relative overflow-hidden bg-[#020617] flex flex-col items-center pt-8 md:pt-12">
             
             <div className="absolute inset-0 bg-[#020617] z-0" />
 
@@ -100,7 +100,7 @@ const Skills: React.FC = () => {
             </div>
 
             {/* GRID VIEW */}
-            <div className="z-10 w-full max-w-6xl px-8 h-[calc(100vh-220px)] overflow-y-auto custom-glass-scroll">
+            <div className="z-10 w-full max-w-6xl px-4 sm:px-8 md:h-[calc(100vh-220px)] overflow-y-auto custom-glass-scroll">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-20">
                     {SKILL_DATA.map((skill) => (
                         <SkillCard 
@@ -124,10 +124,10 @@ const Skills: React.FC = () => {
                     >
                         <motion.div
                             layoutId={selectedId}
-                            className="bg-slate-900 border border-cyan-400/20 rounded-[3rem] p-10 max-w-lg w-full relative text-center"
+                            className="bg-slate-900 border border-cyan-400/20 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 max-w-lg w-full relative text-center"
                             onClick={e => e.stopPropagation()}
                         >
-                            <button onClick={() => setSelectedId(null)} className="absolute top-8 right-8 text-slate-500 hover:text-white"><X size={20} /></button>
+                            <button onClick={() => setSelectedId(null)} className="absolute top-4 right-4 sm:top-8 sm:right-8 text-slate-500 hover:text-white"><X size={20} /></button>
                             
                             <div className="relative w-24 h-24 mx-auto mb-6 flex items-center justify-center">
                                 <div className="absolute inset-0 rounded-full blur-3xl opacity-30" style={{ backgroundColor: selectedSkill.color }} />

@@ -98,9 +98,9 @@ const AITools: React.FC = () => {
                    
                 </div>
 
-                {/* AI Orbs Matrix - 2 x 7 GRID NON-SCROLLABLE */}
-                <div className="flex-1 flex items-center justify-center">
-                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-y-12 gap-x-8 md:gap-x-12 lg:gap-x-16 max-w-6xl">
+                {/* AI Orbs Matrix */}
+                <div className="flex-1 flex items-center justify-center py-8">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-y-12 gap-x-8 md:gap-x-12 lg:gap-x-16 max-w-6xl">
                         {aiTools.map((tool, idx) => (
                             <AIToolOrb key={tool.name} tool={tool} index={idx} />
                         ))}
